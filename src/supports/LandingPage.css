@@ -1,0 +1,7 @@
+.sporteens-jumbotron{
+    background-image: url('./images/jumbotron.jpg');
+    height: 600px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
