@@ -1,5 +1,5 @@
 .sporteens-jumbotron{
-    background-image: url('./images/jumbotron.jpg');
+    background:linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./images/jumbotron.jpg');
     height: 600px;
     background-repeat: no-repeat;
     background-position: center;
