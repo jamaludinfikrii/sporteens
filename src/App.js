@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from './components/Navbar'
 import './supports/Components.css'
+import './supports/Utils.css'
 
 // 
 

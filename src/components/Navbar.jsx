@@ -10,17 +10,17 @@ export class Navbar extends Component {
 
     render() {
         return (
-            <div className='bg-secondary py-4'>
+            <div className='sporteens-bg-main-dark py-4'>
                 <div className="container">
                     <div className="row justify-content-between px-4">
 
                         {/* Header Logo */}
-                        <div className="sporteens-logo-header sporteens-clickable-el ">
+                        <div className="sporteens-light sporteens-logo-header sporteens-clickable-el ">
                             LOGO
                         </div>
 
                         {/* Header Items */}
-                        <div className="sporteens-items-header d-none d-md-block">
+                        <div className="sporteens-light sporteens-items-header d-none d-md-block">
                             <span className='mr-md-3 sporteens-clickable-el'>
                                 Home
                             </span>
@@ -36,7 +36,9 @@ export class Navbar extends Component {
                                
                         </div>
 
-                        <div className='sporteens-items-mobile d-md-none'>
+
+                        {/* Header Icons Mobile */}
+                        <div className='sporteens-light sporteens-items-mobile d-md-none'>
                             {
                                 this.state.openToggle ?
                                 <span onClick={ () =>this.setState({openToggle : false})} className='sporteens-clickable-el'>
@@ -51,21 +53,23 @@ export class Navbar extends Component {
                         </div>
 
 
-
                     </div>
+
+
+                    {/* Header Items Mobile */}
                     {
                         this.state.openToggle ?
-                            <div className="sporteens-header-items-mobile px-2 d-md-none">
-                                <div className="bg-primary sporteens-clickable-el">
+                            <div className="sporteens-light sporteens-header-items-mobile px-2 d-md-none">
+                                <div className="mt-3 border-bottom sporteens-clickable-el">
                                     Home
                                 </div>
-                                <div className="bg-primary sporteens-clickable-el">
+                                <div className="mt-3 border-bottom sporteens-clickable-el">
                                     Products
                                 </div>
-                                <div className="bg-primary sporteens-clickable-el">
+                                <div className="mt-3 border-bottom sporteens-clickable-el">
                                     Brands
                                 </div>
-                                <div className="bg-primary sporteens-clickable-el">
+                                <div className="mt-3 border-bottom sporteens-clickable-el">
                                     Carts
                                 </div>
                             </div>
