@@ -10,7 +10,7 @@ function phoneNumberValidator(input=''){
             if(!(input[i] >= 0)){
                 return 'cannot include characters'
             }
-            if(input[i] == ' '){
+            if(input[i] === ' '){
                 return 'cannot include white space'
             }
     

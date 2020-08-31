@@ -1,24 +1,29 @@
 {
-    "users":[
-        {
-            "id" : 1,
-            "phone" : "0822274821",
-            "email" : "",
-            "password" : "123123"
-        }
-    ],
-
-    "products":[
-        {
-            "id" : 1,
-            "name" : "Nike Air Jordan XXXXXX",
-            "price" : 20000000,
-            "discount" : 10,
-            "image1" : "url1",
-            "image2" : "url2",
-            "image3" : "",
-            "brand" : "Nike",
-            "stock" : 5
-        }
-    ]
+  "users": [
+    {
+      "id": 1,
+      "phone": "0822274821",
+      "email": "",
+      "password": "123123"
+    },
+    {
+      "phone": "0822268479346",
+      "email": "",
+      "password": "",
+      "id": 2
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Nike Air Jordan XXXXXX",
+      "price": 20000000,
+      "discount": 10,
+      "image1": "url1",
+      "image2": "url2",
+      "image3": "",
+      "brand": "Nike",
+      "stock": 5
+    }
+  ]
 }
