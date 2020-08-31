@@ -4,6 +4,7 @@
     --black : #222831;
     --light : #dbe2ef;
     --main-dark : #364f6b;
+    --light-dark : #f6f5f5;
 }
 
 
@@ -28,6 +29,9 @@
     color: var(--light);
 }
 
+.sporteens-light-dark {
+    color: var(--light-dark);
+}
 
 
 .sporteens-bg-main{
@@ -49,4 +53,8 @@
 
 .sporteens-bg-light {
     background-color: var(--light);
+}
+
+.sporteens-bg-light-dark {
+    background-color: var(--light-dark);
 }
