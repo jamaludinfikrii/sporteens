@@ -58,3 +58,30 @@
 .sporteens-bg-light-dark {
     background-color: var(--light-dark);
 }
+
+
+
+/* Fonts */
+
+.sporteens-font-8{
+    font-size: 8px;
+}
+
+.sporteens-font-10{
+    font-size: 10px;
+}
+
+.sporteens-font-12{
+    font-size: 12px;
+}
+.sporteens-font-14{
+    font-size: 14px;
+}
+
+.sporteens-font-16{
+    font-size: 16px;
+}
+
+.sporteens-font-20{
+    font-size: 20px;
+}
