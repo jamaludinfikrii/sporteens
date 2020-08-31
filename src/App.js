@@ -10,6 +10,7 @@ import Brands from './pages/Brands'
 import Cart from './pages/Cart'
 import Register from './pages/Register'
 import Footer from './components/Footer'
+import CreatePassword from './pages/CreatePassword'
 // 
 
 export class App extends Component {
@@ -25,6 +26,7 @@ export class App extends Component {
           <Route path='/brands' component={Brands} />
           <Route path='/carts' component={Cart} />
           <Route path='/register' component={Register} />
+          <Route path='/create-password' component={CreatePassword} />
         </Switch>
         <Footer/>
       </div>

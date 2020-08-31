@@ -17,7 +17,6 @@ class Register extends Component{
         if(Number(value[0]) >= 0){
             var phoneValidatorResult = phoneNumberValidator(value)
             if(phoneValidatorResult === true){
-                alert('berhasil')
                 this.sendDataToApi({phone : value, email : ""})
                 // kirim ke api
             }else{
@@ -26,7 +25,6 @@ class Register extends Component{
             }
         }else{
             if(emailValidator(value) === true){
-                alert('berhasil')
                 this.sendDataToApi({email : value , phone : ""})
 
                 // kirim ke api
@@ -50,6 +48,8 @@ class Register extends Component{
         Axios.post(apiUrl + 'users' , dataToSend )
         .then((res) => {
             console.log(res)
+            alert('register success')
+            window.location = '/create-password/' + res.data.id
         })
         .catch((err) => {
             console.log(err)
