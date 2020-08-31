@@ -8,6 +8,8 @@ import LandingPage from './pages/LandingPage'
 import ListProducts from './pages/ListProducts'
 import Brands from './pages/Brands'
 import Cart from './pages/Cart'
+import Register from './pages/Register'
+import Footer from './components/Footer'
 // 
 
 export class App extends Component {
@@ -22,7 +24,9 @@ export class App extends Component {
           <Route path='/products' component={ListProducts} />
           <Route path='/brands' component={Brands} />
           <Route path='/carts' component={Cart} />
+          <Route path='/register' component={Register} />
         </Switch>
+        <Footer/>
       </div>
       </BrowserRouter>
     )
