@@ -98,3 +98,11 @@
 .sporteens-input:focus{
     outline: none;
 }
+
+.sporteens-link{
+    color: inherit;
+}
+.sporteens-link:hover{
+    text-decoration: none;
+    color: inherit;
+}

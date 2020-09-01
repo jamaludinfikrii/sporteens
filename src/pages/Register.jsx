@@ -4,7 +4,6 @@ import emailValidator from '../supports/functions/emailValidator';
 import phoneNumberValidator from '../supports/functions/phoneNumberValidator';
 import Axios from 'axios';
 import apiUrl from '../supports/constants/apiUrl';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 class Register extends Component{
     state= {

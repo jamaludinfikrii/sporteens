@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
 
 export class Navbar extends Component {
 
     state ={
-        openToggle : false
+        openToggle : false,
+        isLogin : true
     }
 
     render() {
@@ -16,23 +18,61 @@ export class Navbar extends Component {
 
                         {/* Header Logo */}
                         <div className="sporteens-light sporteens-logo-header sporteens-clickable-el ">
-                            LOGO
+                            <Link to='/' className='sporteens-link'>
+                                Logo
+                            </Link>
                         </div>
 
                         {/* Header Items */}
                         <div className="sporteens-light sporteens-items-header d-none d-md-block">
                             <span className='mr-md-3 sporteens-clickable-el'>
-                                Home
+                                <Link to='/' className='sporteens-link'>
+                                    Home
+                                </Link>
                             </span>
                             <span className='mr-md-3 sporteens-clickable-el'>
-                                Products
+                                <Link to='/products' className='sporteens-link'>
+                                    Products
+                                </Link>
                             </span>
                             <span className='mr-md-3 sporteens-clickable-el'>
+                                <Link to='/brands' className='sporteens-link'>
+
                                 Brands
+                                </Link>
                             </span>
-                            <span className='mr-md-3 sporteens-clickable-el' >
-                                Cart
-                            </span>   
+
+                            {this.state.isLogin ? 
+                                <span>
+                                    <span className='mr-md-3 sporteens-clickable-el' >
+                                        <Link to='/cart' className='sporteens-link'>
+
+                                        Cart
+                                        </Link>
+                                    </span>   
+                                    <span className='d-inline-block mr-md-3 sporteens-clickable-el' >
+                                        <img width='30px' className='mr-2' src='https://i.pinimg.com/originals/ff/a0/9a/ffa09aec412db3f54deadf1b3781de2a.png' alt='avatar-circle' />
+                                        <Link to='/user-detail' className='sporteens-link h-100 d-inline-block'>
+                                            Fikri
+                                        </Link>
+                                    </span>
+                                </span>
+                                :
+                                <span>
+                                    <span className='mr-md-3 sporteens-clickable-el' >
+                                        <Link to='/register' className='sporteens-link'>
+                                            Login
+                                        </Link>
+                                    </span>  
+                                    <span className='mr-md-3 sporteens-clickable-el' >
+                                        <Link to='/register' className='sporteens-link'>
+                                            Register
+                                        </Link>
+                                    </span>  
+                                </span>
+                            
+                            }
+
                                
                         </div>
 
