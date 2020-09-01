@@ -60,6 +60,7 @@ class Register extends Component{
                     console.log(res)
                     alert('register success')
                     window.location = '/create-password/' + res.data.id
+                    localStorage.setItem('id',res.data.id)
                 })
                 .catch((err) => {
                     this.setState({errorMessage : err.message })

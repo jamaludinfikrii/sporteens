@@ -2,12 +2,52 @@ import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
+import Axios from 'axios'
+import apiUrl from '../supports/constants/apiUrl'
 
 export class Navbar extends Component {
 
     state ={
         openToggle : false,
-        isLogin : true
+        isLogin : false,
+        data : null
+    }
+
+    componentDidMount(){
+        this.getIdUser()
+    }
+
+
+    onLogout = () => {
+        if(window.confirm('are you sure want to logout??')){
+            localStorage.removeItem('id')
+            window.location = '/'
+        }
+    }
+
+    getIdUser = () => {
+        var id = localStorage.getItem('id')
+        console.log(id)
+        if(id){
+            this.setState({isLogin : true})
+            Axios.get(apiUrl + 'users/' + id)
+            .then((res)=> {
+                if(res.data.email){
+                    this.setState({data : res.data.email})
+                }else{
+                    this.setState({data : res.data.phone})
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+                alert(err.message)
+            })
+        }else{
+            this.setState({isLogin : false})
+        }
+        // get value di localstorage
+        // kalau value ada
+        // set is login = true
     }
 
     render() {
@@ -52,8 +92,8 @@ export class Navbar extends Component {
                                     </span>   
                                     <span className='d-inline-block mr-md-3 sporteens-clickable-el' >
                                         <img width='30px' className='mr-2' src='https://i.pinimg.com/originals/ff/a0/9a/ffa09aec412db3f54deadf1b3781de2a.png' alt='avatar-circle' />
-                                        <Link to='/user-detail' className='sporteens-link h-100 d-inline-block'>
-                                            Fikri
+                                        <Link onClick={this.onLogout} className='sporteens-link h-100 d-inline-block'>
+                                            {this.state.data ? this.state.data.slice(0,4) + '...' : null}
                                         </Link>
                                     </span>
                                 </span>

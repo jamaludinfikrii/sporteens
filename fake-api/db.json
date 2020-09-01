@@ -47,6 +47,24 @@
       "phone": "",
       "password": "123123",
       "id": 8
+    },
+    {
+      "email": "fikri@fikri.id",
+      "phone": "",
+      "password": "123123",
+      "id": 9
+    },
+    {
+      "phone": "08274538645",
+      "email": "",
+      "password": "123123",
+      "id": 10
+    },
+    {
+      "phone": "06535669876",
+      "email": "",
+      "password": "123123",
+      "id": 11
     }
   ],
   "products": [
