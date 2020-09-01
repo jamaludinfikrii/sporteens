@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
 import Axios from 'axios'
 import apiUrl from '../supports/constants/apiUrl'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
 
 export class CreatePassword extends Component {
+    state= {
+        eyePassword : true,
+        eyeConfirm : true
+    }
+
     onSubmitBtnClick = () => {
         // get value
         let pass = this.refs.pass.value
@@ -37,8 +44,16 @@ export class CreatePassword extends Component {
                 <h1 className='text-center'> Create Your Password Here !! </h1>
                 <div className="row justify-content-center mt-5">
                     <div className="col-md-4 p-5 sporteens-bg-main-dark rounded sporteens-shadow">
-                        <input type="password" ref='pass' className='form-control' placeholder='enter password'/>
-                        <input type="password" ref='passconfirm' className='form-control mt-3' placeholder='confirm password'/>
+                        <div className='border bg-white d-flex px-2'>
+                            <input style={{flex:'1',border:'none'}} className='p-2 sporteens-input' type={this.state.eyePassword ? 'password' : 'text'} ref='pass' placeholder='enter password'/>
+                            <span><FontAwesomeIcon className='h-100' color='gray' onClick= {() => this.setState({eyePassword : !this.state.eyePassword})}  icon={faEye} /></span>
+                        </div>
+                        <div className='border bg-white d-flex px-2 mt-3'>
+                            <input style={{flex:'1',border:'none'}} className='p-2 sporteens-input' type={this.state.eyeConfirm ? 'password' : 'text'} ref='passconfirm' placeholder='confirm password'/>
+                            <span><FontAwesomeIcon className='h-100' color='gray' onClick={() => this.setState({eyeConfirm : ! this.state.eyeConfirm})}  icon={faEye} /></span>
+                        </div>
+                        
+                        {/* <input type="password" ref='passconfirm' className='form-control mt-3' placeholder='confirm password'/> */}
                         <input type="button" onClick={this.onSubmitBtnClick} value="Submit" className='btn btn-white w-100 mt-5'/>
                     </div>
                 </div>

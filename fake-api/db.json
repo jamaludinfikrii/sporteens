@@ -29,6 +29,24 @@
       "phone": "",
       "password": "234234",
       "id": 5
+    },
+    {
+      "phone": "082226847592",
+      "email": "",
+      "password": "123123",
+      "id": 6
+    },
+    {
+      "email": "joko@joko.com",
+      "phone": "",
+      "password": "123123",
+      "id": 7
+    },
+    {
+      "email": "joko@fikri.com",
+      "phone": "",
+      "password": "123123",
+      "id": 8
     }
   ],
   "products": [

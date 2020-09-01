@@ -4,6 +4,7 @@ import emailValidator from '../supports/functions/emailValidator';
 import phoneNumberValidator from '../supports/functions/phoneNumberValidator';
 import Axios from 'axios';
 import apiUrl from '../supports/constants/apiUrl';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 class Register extends Component{
     state= {
@@ -45,14 +46,33 @@ class Register extends Component{
         var dataToSend = data
         dataToSend.password = ''
 
-        Axios.post(apiUrl + 'users' , dataToSend )
+        var datatype = data.phone ? 'phone' : 'email'
+        var datavalue = data.phone ? data.phone : data.email
+
+        console.log(datatype)
+        console.log(datavalue)
+
+
+        Axios.get(apiUrl + 'users?' + datatype + '=' + datavalue)
         .then((res) => {
-            console.log(res)
-            alert('register success')
-            window.location = '/create-password/' + res.data.id
+            if(res.data.length === 0) {
+                Axios.post(apiUrl + 'users' , dataToSend )
+                .then((res) => {
+                    console.log(res)
+                    alert('register success')
+                    window.location = '/create-password/' + res.data.id
+                })
+                .catch((err) => {
+                    this.setState({errorMessage : err.message })
+                })
+                // available
+            }else{
+                this.setState({errorMessage : datatype + ' already taken, try another !!!!'})
+            }
         })
+
         .catch((err) => {
-            console.log(err)
+            this.setState({errorMessage : err.message})
         })
     }
 
@@ -99,3 +119,6 @@ class Register extends Component{
 }
 
 export default Register
+
+
+// validasi phone number atau email gak boleh sama
