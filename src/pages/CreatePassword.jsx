@@ -53,6 +53,7 @@ export class CreatePassword extends Component {
                             <span><FontAwesomeIcon className='h-100' color='gray' onClick={() => this.setState({eyeConfirm : ! this.state.eyeConfirm})}  icon={faEye} /></span>
                         </div>
                         
+                        
                         {/* <input type="password" ref='passconfirm' className='form-control mt-3' placeholder='confirm password'/> */}
                         <input type="button" onClick={this.onSubmitBtnClick} value="Submit" className='btn btn-white w-100 mt-5'/>
                     </div>

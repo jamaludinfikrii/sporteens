@@ -3,8 +3,55 @@ import './../supports/css/LandingPage.css'
 import Image from './../supports/images/product_1.webp'
 import Logo1 from './../supports/images/logo_brand_1.png'
 import Logo2 from './../supports/images/logo_brand_2.webp'
+import Axios from 'axios'
+import apiUrl from '../supports/constants/apiUrl'
+import Loader from 'react-loader-spinner'
+
 
 export class LandingPage extends Component {
+
+    state = {
+        data : null
+    }
+
+    // render
+    // compdidmount
+    // render
+
+    componentDidMount(){
+        this.getAllProducts()
+    }
+
+    getAllProducts = () => {
+        Axios.get(apiUrl + "products")
+        .then((res) => {
+            console.log(res.data)
+            this.setState({data : res.data})
+        })
+        .catch((err) => {
+            alert(err.message)
+        })
+    }
+
+
+    renderDataToJsx = () => {
+        var jsx = this.state.data.map((val) => {
+            if(val.discount){
+                return(
+                    <div className='d-inline-block mr-2' style={{width : "173px"}}>
+                        <img src={val.image1} width='100%'  alt="product"/>
+                        <p className='p-0 m-0 sporteens-main-dark font-weight-bold'>{val.name.slice(0,15) + '...'}</p>
+                        <p className='p-0 m-0 text-danger'>{val.discount}% Off</p>
+                        <p className='p-0 m-0 text-secondary'> <s>Rp. {val.price}</s> </p>
+                        <p className='p-0 m-0 sporteens-main-dark'> Rp. {val.price - (val.price * (val.discount/100))} </p>
+                    </div>   
+                )
+            }
+        } )
+
+        return jsx
+    }
+
     render() {
         return (
             <div>
@@ -27,13 +74,15 @@ export class LandingPage extends Component {
                         <h3 className='p-0 m-0'>Flash Sale</h3> 
                         <p>Grab it now !!</p>
                         <div style={{overflow:'auto',whiteSpace:'nowrap'}} className="mt-4 p-3">
-                            <div className='d-inline-block mr-2' style={{width : "173px"}}>
-                                <img src={Image} width='100%'  alt="product"/>
-                                <p className='p-0 m-0 sporteens-main-dark font-weight-bold'>Product Name</p>
-                                <p className='p-0 m-0 text-danger'>30% Off</p>
-                                <p className='p-0 m-0 text-secondary'> <s>Rp. 100000</s> </p>
-                                <p className='p-0 m-0 sporteens-main-dark'> Rp. 70000 </p>
-                            </div>   
+                            {
+                                this.state.data === null ? 
+                                <div>
+                                <Loader className='text-center p-0 m-0' type="ThreeDots" color="#364f6b" height={40} width={40} />
+                                <p className='text-center sporteens-main-dark'>loading</p>
+                                </div>
+                                : 
+                                this.renderDataToJsx()
+                            }
                             
                         </div>
                     </div>
