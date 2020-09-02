@@ -46,8 +46,8 @@ export class LandingPage extends Component {
                         <p className='p-0 m-0 sporteens-main-dark font-weight-bold'>{val.name.slice(0,15) + '...'}</p>
                         </Link>
                         <p className='p-0 m-0 text-danger'>{val.discount}% Off</p>
-                        <p className='p-0 m-0 text-secondary'> <s>Rp. {val.price}</s> </p>
-                        <p className='p-0 m-0 sporteens-main-dark'> Rp. {val.price - (val.price * (val.discount/100))} </p>
+                        <p className='p-0 m-0 text-secondary'> <s>Rp. {val.price.toLocaleString('id-ID')}</s> </p>
+                        <p className='p-0 m-0 sporteens-main-dark'> Rp. {(val.price - (val.price * (val.discount/100))).toLocaleString('id-ID')} </p>
                     </div>   
                 )
             }

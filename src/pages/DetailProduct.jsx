@@ -4,13 +4,17 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import Axios from 'axios';
 import apiUrl from '../supports/constants/apiUrl';
 import LoadingPage from '../components/LoadingPage';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class ViewProduct extends Component{
     state = {
-        data : null
+        data : null,
+        modalOpen : false
     }
 
     componentDidMount(){
+        window.scrollTo(0,0)
         this.getDataProductsById()
     }
 
@@ -27,6 +31,24 @@ class ViewProduct extends Component{
         })
     }
 
+    onAddToCartBtn = () => {
+        var id = localStorage.getItem('id')
+        if(id){
+            // udah login
+        }else{
+            this.setState({modalOpen : true})
+        }
+    }
+
+    onAddWishlistBtn = () => {
+        var id = localStorage.getItem('id')
+        if(id){
+            // udah login
+        }else{
+            this.setState({modalOpen : true})
+        }
+    }
+
     render(){
         if(this.state.data === null) {
             return (
@@ -36,6 +58,23 @@ class ViewProduct extends Component{
         return(
             <div>
                 <div className="container mt-5">
+                    {/* Modal Login */}
+                    <Modal toggle={() => this.setState({modalOpen : false})} isOpen={this.state.modalOpen}>
+                        <ModalHeader toggle={() => this.setState({modalOpen : false})}>
+                            Login Here
+                        </ModalHeader>
+                        <ModalBody>
+                            <p className='text-center sporteens-main-dark font-weight-bold'>You must login First !!</p>
+                            <input type='text' placeholder='enter your phone / email' className='form-control' />
+                            <input type='password' placeholder='enter your password' className='form-control mt-3' />
+                            <input type="button" className='btn btn-info mt-4' value='submit'/>
+
+                        </ModalBody>
+                        <ModalFooter>
+                        <p className='text-center sporteens-font-14'>Don't have account yet? <Link to='/register' className='sporteens-link'> <span className='sporteens-clickable-el sporteens-main-dark font-weight-bold'> Register here </span> </Link> </p>
+
+                        </ModalFooter>
+                    </Modal>
                     <div className="row justify-content-center">
                         <div className="col-md-6">
                             <div className="row justify-content-center px-3 py-3">
@@ -56,7 +95,16 @@ class ViewProduct extends Component{
                         <div className="col-md-6 pt-4">
                             <h3 className='sporteens-main-dark'>{this.state.data.name}</h3>
                             <span className='text-secondary'>Terjual 5 Produk</span>
-                            <h3 className="pt-3 text-danger">Rp. 1000000</h3>
+                            {
+                                this.state.data.discount ? 
+                                <span className='pt-3'>
+                                   
+                                    <h3 className="text-danger pt-3">  Rp.{(this.state.data.price - (this.state.data.price * (this.state.data.discount/100))).toLocaleString('id-ID')}  <span className='sporteens-font-14 sporteens-main-dark'><s>Rp {this.state.data.price.toLocaleString('id-ID')} </s></span></h3>
+                                </span>
+                                :
+                                <h3 className="text-danger pt-3">  Rp.{(this.state.data.price - (this.state.data.price * (this.state.data.discount/100))).toLocaleString('id-ID')}</h3>
+                            }
+
                             <hr className="mt-3" />
                             <h5 className="font-weight-bold">Stock</h5>
                             <h5 className="font-weight-light text-secondary sporteens-font-12">{this.state.data.Stock} Pcs</h5>
@@ -67,10 +115,10 @@ class ViewProduct extends Component{
                             <h6 className="font-weight-light sporteens-font-14">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, vero ipsum fuga delectus quasi, voluptates eos aut fugiat impedit praesentium rerum exercitationem eaque quidem? Ipsam fuga similique magnam blanditiis est?</h6>
                             <div className="row pt-3">
                                 <div className="col-5 col-md-6">
-                                    <input type="button" value="Add To Cart" className="btn rounded-0 w-100 sporteens-bg-main text-white"/>
+                                    <input type="button" onClick={this.onAddToCartBtn} value="Add To Cart" className="btn rounded-0 w-100 sporteens-bg-main text-white"/>
                                 </div>
                                 <div className="col-5 col-md-6">
-                                    <div className='border p-1 rounded d-inline-block h-100'>
+                                    <div onClick={this.onAddWishlistBtn} className='border p-1 rounded d-inline-block h-100 sporteens-clickable-el'>
                                         <FontAwesomeIcon icon={faHeart}  className='text-danger'/>
                                     </div>
                                 </div>

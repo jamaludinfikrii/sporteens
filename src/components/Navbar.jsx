@@ -4,13 +4,15 @@ import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import Axios from 'axios'
 import apiUrl from '../supports/constants/apiUrl'
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 
 export class Navbar extends Component {
 
     state ={
         openToggle : false,
         isLogin : false,
-        data : null
+        data : null,
+        modalOpen : false
     }
 
     componentDidMount(){
@@ -54,6 +56,22 @@ export class Navbar extends Component {
         return (
             <div className='sporteens-bg-main-dark py-4'>
                 <div className="container">
+                    {/* Login Modal */}
+                    <Modal toggle={() => this.setState({modalOpen : false})} isOpen={this.state.modalOpen}>
+                        <ModalHeader toggle={() => this.setState({modalOpen : false})}>
+                            Login Here
+                        </ModalHeader>
+                        <ModalBody>
+                            <input type='text' placeholder='enter your phone / email' className='form-control' />
+                            <input type='password' placeholder='enter your password' className='form-control mt-3' />
+                            <input type="button" className='btn btn-info mt-4' value='submit'/>
+
+                        </ModalBody>
+                        <ModalFooter>
+                        <p className='text-center sporteens-font-14'>Don't have account yet? <Link to='/register' className='sporteens-link'> <span className='sporteens-clickable-el sporteens-main-dark font-weight-bold'> Register here </span> </Link></p>
+
+                        </ModalFooter>
+                    </Modal>
                     <div className="row justify-content-between px-4">
 
                         {/* Header Logo */}
@@ -100,7 +118,7 @@ export class Navbar extends Component {
                                 :
                                 <span>
                                     <span className='mr-md-3 sporteens-clickable-el' >
-                                        <Link to='/register' className='sporteens-link'>
+                                        <Link onClick={() => this.setState({modalOpen : true})} className='sporteens-link'>
                                             Login
                                         </Link>
                                     </span>  
