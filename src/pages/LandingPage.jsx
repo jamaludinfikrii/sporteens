@@ -6,6 +6,8 @@ import Logo2 from './../supports/images/logo_brand_2.webp'
 import Axios from 'axios'
 import apiUrl from '../supports/constants/apiUrl'
 import Loader from 'react-loader-spinner'
+import { Link } from 'react-router-dom'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 
 export class LandingPage extends Component {
@@ -39,8 +41,10 @@ export class LandingPage extends Component {
             if(val.discount){
                 return(
                     <div className='d-inline-block mr-2' style={{width : "173px"}}>
+                        <Link className='sporteens-link' to={'/detail-product/' + val.id} >
                         <img src={val.image1} width='100%'  alt="product"/>
                         <p className='p-0 m-0 sporteens-main-dark font-weight-bold'>{val.name.slice(0,15) + '...'}</p>
+                        </Link>
                         <p className='p-0 m-0 text-danger'>{val.discount}% Off</p>
                         <p className='p-0 m-0 text-secondary'> <s>Rp. {val.price}</s> </p>
                         <p className='p-0 m-0 sporteens-main-dark'> Rp. {val.price - (val.price * (val.discount/100))} </p>
@@ -60,8 +64,9 @@ export class LandingPage extends Component {
                     <div className="container h-100">
                         <div className="row h-100 align-items-center">
                             <div className="col-md-6 text-center text-md-left">
-                                <h1 className='sporteens-light'>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h1>
-                                <button className='btn btn-success mt-4'>Get It Now</button>
+                                <h1 className='sporteens-light'>Quality never goes out of style.</h1>
+                                <p className='sporteens-light'>Explore your true style with Sporteeens</p>
+                                <button className='btn btn-white mt-4'>Shop Now</button>
                             </div>
                         </div>
                     </div>
