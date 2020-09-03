@@ -10,7 +10,8 @@ import { Link } from 'react-router-dom';
 class ViewProduct extends Component{
     state = {
         data : null,
-        modalOpen : false
+        modalOpen : false,
+        selectedPhoto : null
     }
 
     componentDidMount(){
@@ -24,7 +25,7 @@ class ViewProduct extends Component{
         Axios.get(apiUrl + "products/" + id)
         .then((res) => {
             console.log(res.data)
-            this.setState({data : res.data})
+            this.setState({data : res.data,selectedPhoto : res.data.image1})
         })
         .catch((err) => {
             console.log(err)
@@ -79,16 +80,16 @@ class ViewProduct extends Component{
                         <div className="col-md-6">
                             <div className="row justify-content-center px-3 py-3">
                                 <div className="col-12 text-center py-3">
-                                    <img src={this.state.data.image1} alt="" width="75%" />
+                                    <img src={this.state.selectedPhoto} alt="" width="75%" />
                                 </div>
                                 <div className="col-3 text-center w-100">
-                                    <img src={this.state.data.image1} alt="" width="75%" />
+                                    <img className={this.state.selectedPhoto === this.state.data.image1 ? 'sporteens-clickable-el border' : 'sporteens-clickable-el'} onClick={() =>this.setState({selectedPhoto : this.state.data.image1})} src={this.state.data.image1} alt="" width="75%" />
                                 </div>
                                 <div className="col-3 text-center w-100">
-                                    <img src={this.state.data.image2} alt="" width="75%" />
+                                    <img className={this.state.selectedPhoto === this.state.data.image2 ? 'sporteens-clickable-el border' : 'sporteens-clickable-el'} onClick={() =>this.setState({selectedPhoto : this.state.data.image2})} src={this.state.data.image2} alt="" width="75%" />
                                 </div>
                                 <div className="col-3 text-center w-100">
-                                    <img src={this.state.data.image3} alt="" width="75%" />
+                                    <img className={this.state.selectedPhoto === this.state.data.image3 ? 'sporteens-clickable-el border' : 'sporteens-clickable-el'} onClick={() =>this.setState({selectedPhoto : this.state.data.image3})} src={this.state.data.image3} alt="" width="75%" />
                                 </div>
                             </div>
                         </div>

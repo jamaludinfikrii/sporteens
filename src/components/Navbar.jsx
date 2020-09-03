@@ -181,3 +181,10 @@ export class Navbar extends Component {
 }
 
 export default Navbar;
+
+
+// Photo display in Product Detail
+// Product Page
+// Navbar Mobile 
+// Login ==> cocokin user input dengan di db.json
+    // ==> kalau cocok, masukin datanya ke localStorage

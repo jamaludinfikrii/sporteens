@@ -7,7 +7,6 @@ import Axios from 'axios'
 import apiUrl from '../supports/constants/apiUrl'
 import Loader from 'react-loader-spinner'
 import { Link } from 'react-router-dom'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 
 export class LandingPage extends Component {
@@ -51,6 +50,7 @@ export class LandingPage extends Component {
                     </div>   
                 )
             }
+            return null
         } )
 
         return jsx
