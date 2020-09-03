@@ -4,6 +4,7 @@ import emailValidator from '../supports/functions/emailValidator';
 import phoneNumberValidator from '../supports/functions/phoneNumberValidator';
 import Axios from 'axios';
 import apiUrl from '../supports/constants/apiUrl';
+import LoginModal from '../components/LoginModal';
 
 class Register extends Component{
     state= {
@@ -107,7 +108,7 @@ class Register extends Component{
                                     {/* Register With Google */}
                                     <h5 className="font-weight-bolder my-4">Atau</h5>
                                     <input type="button" value="Daftar Dengan Akun Google" className="btn rounded-0 w-100 mb-1 btn-danger text-white" />
-                                    <span>Sudah Punya Akun? <b>Masuk</b></span>
+                                    <span>Sudah Punya Akun? <LoginModal isi='Masuk' className='font-weight-bold sporteens-clickable-el' /></span>
                                 </div>
                             </div>
                         </div>

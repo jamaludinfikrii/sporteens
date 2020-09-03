@@ -4,14 +4,13 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import Axios from 'axios';
 import apiUrl from '../supports/constants/apiUrl';
 import LoadingPage from '../components/LoadingPage';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import LoginModal from '../components/LoginModal';
 
 class ViewProduct extends Component{
     state = {
         data : null,
-        modalOpen : false,
-        selectedPhoto : null
+        selectedPhoto : null,
+        isLogin : false
     }
 
     componentDidMount(){
@@ -32,24 +31,6 @@ class ViewProduct extends Component{
         })
     }
 
-    onAddToCartBtn = () => {
-        var id = localStorage.getItem('id')
-        if(id){
-            // udah login
-        }else{
-            this.setState({modalOpen : true})
-        }
-    }
-
-    onAddWishlistBtn = () => {
-        var id = localStorage.getItem('id')
-        if(id){
-            // udah login
-        }else{
-            this.setState({modalOpen : true})
-        }
-    }
-
     render(){
         if(this.state.data === null) {
             return (
@@ -59,23 +40,7 @@ class ViewProduct extends Component{
         return(
             <div>
                 <div className="container mt-5">
-                    {/* Modal Login */}
-                    <Modal toggle={() => this.setState({modalOpen : false})} isOpen={this.state.modalOpen}>
-                        <ModalHeader toggle={() => this.setState({modalOpen : false})}>
-                            Login Here
-                        </ModalHeader>
-                        <ModalBody>
-                            <p className='text-center sporteens-main-dark font-weight-bold'>You must login First !!</p>
-                            <input type='text' placeholder='enter your phone / email' className='form-control' />
-                            <input type='password' placeholder='enter your password' className='form-control mt-3' />
-                            <input type="button" className='btn btn-info mt-4' value='submit'/>
-
-                        </ModalBody>
-                        <ModalFooter>
-                        <p className='text-center sporteens-font-14'>Don't have account yet? <Link to='/register' className='sporteens-link'> <span className='sporteens-clickable-el sporteens-main-dark font-weight-bold'> Register here </span> </Link> </p>
-
-                        </ModalFooter>
-                    </Modal>
+                   
                     <div className="row justify-content-center">
                         <div className="col-md-6">
                             <div className="row justify-content-center px-3 py-3">
@@ -116,11 +81,22 @@ class ViewProduct extends Component{
                             <h6 className="font-weight-light sporteens-font-14">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, vero ipsum fuga delectus quasi, voluptates eos aut fugiat impedit praesentium rerum exercitationem eaque quidem? Ipsam fuga similique magnam blanditiis est?</h6>
                             <div className="row pt-3">
                                 <div className="col-5 col-md-6">
-                                    <input type="button" onClick={this.onAddToCartBtn} value="Add To Cart" className="btn rounded-0 w-100 sporteens-bg-main text-white"/>
+                                    {
+                                        this.state.isLogin ? 
+                                        <input type="button" value="Add To Cart" className="btn rounded-0 w-100 sporteens-bg-main text-white"/>
+                                        :
+                                        <LoginModal isi='Add to cart' className='btn rounded-0 w-100 sporteens-bg-main text-white' />
+                                    }
                                 </div>
                                 <div className="col-5 col-md-6">
-                                    <div onClick={this.onAddWishlistBtn} className='border p-1 rounded d-inline-block h-100 sporteens-clickable-el'>
-                                        <FontAwesomeIcon icon={faHeart}  className='text-danger'/>
+
+                                    <div className='border p-1 rounded d-inline-block h-100 sporteens-clickable-el'>
+                                       { 
+                                       this.state.isLogin ?
+                                       <FontAwesomeIcon icon={faHeart}  className='text-danger'/>
+                                       :
+                                       <LoginModal isi={<FontAwesomeIcon icon={faHeart}  className='text-danger'/>} />
+                                       }
                                     </div>
                                 </div>
                             </div>
