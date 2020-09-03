@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import './../supports/css/ListProducts.css'
-import Image from './../supports/images/product_1.webp'
 import Axios from 'axios'
 import apiUrl from '../supports/constants/apiUrl'
 import Loader from 'react-loader-spinner'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faChevronDown } from '@fortawesome/free-solid-svg-icons'
+
 
 
 export class ListProducts extends Component {
@@ -24,6 +26,35 @@ export class ListProducts extends Component {
         .catch((err) => {
             console.log(err)
         })
+    }
+
+    onChangeSort = () => {
+        var sortBy = this.refs.sort.value
+        var data = this.state.data
+        if(sortBy === 'higherPrice'){
+            data.sort((a,b) => {
+                return b.price - a.price
+            })
+            // sort dari harga tertinggi
+        }else if(sortBy === 'lowerPrice'){
+            data.sort((a,b) => {
+                return a.price - b.price
+            })
+            // sort dari harga terendah
+
+        }else if(sortBy === 'discount'){
+            data.sort((a,b) => {
+                return b.discount - a.discount
+            })
+            // sort dari discount tertinggi
+
+        }else if(sortBy === 'sort'){
+            data.sort((a,b) => {
+                return a.id - b.id
+            })
+            // ubah ke default
+        }
+        this.setState({data : data})
     }
 
     renderDataToJsx = () => {
@@ -74,6 +105,16 @@ export class ListProducts extends Component {
                 {/* Content Section */}
 
                 <div className="container mt-4">
+                    <div className='text-right'>
+                       
+                        <span className='sporteens-font-14 text-secondary sporteens-clickable-el'>Filter <FontAwesomeIcon icon={faChevronDown} /></span>
+                        <select ref='sort' onChange={this.onChangeSort}  className='sporteens-font-14 text-secondary sporteens-clickable-el sporteens-dropdown ml-3'>
+                            <option value="sort">Sort By</option>
+                            <option value="higherPrice">Higher Price</option>
+                            <option value="lowerPrice">Lower Price</option>
+                            <option value="discount">Discount</option>
+                        </select>
+                    </div>
                     <div className="row mt-4">
                         {
                             this.state.data === null ?

@@ -1,14 +1,25 @@
 import React, { Component } from 'react'
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { Link} from 'react-router-dom'
-
+import phoneValidator from './../supports/functions/phoneNumberValidator'
+import emailValidator from './../supports/functions/emailValidator'
 
 export class LoginModal extends Component {
     state = {
         modalOpen : false
     }
 
-   
+    onSubmitBtn = () => {
+        var data = this.refs.data.value
+        var pass = this.refs.password.value
+        if(Number(data[0]) === 0){
+            phoneValidator(data)
+            // phone
+        }else{
+            emailValidator(data)
+            // email
+        }
+    }
     
     render() {
         return (
@@ -19,9 +30,9 @@ export class LoginModal extends Component {
                         Login Here
                     </ModalHeader>
                     <ModalBody>
-                        <input type='text' placeholder='enter your phone / email' className='form-control' />
-                        <input type='password' placeholder='enter your password' className='form-control mt-3' />
-                        <input type="button" className='btn btn-info mt-4' value='submit'/>
+                        <input type='text' ref='data' placeholder='enter your phone / email' className='form-control' />
+                        <input type='password' ref='password' placeholder='enter your password' className='form-control mt-3' />
+                        <input type="button" onClick={this.onSubmitBtn} className='btn btn-info mt-4' value='submit'/>
 
                     </ModalBody>
                     <ModalFooter>
