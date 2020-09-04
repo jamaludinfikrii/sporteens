@@ -12,18 +12,36 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 export class ListProducts extends Component {
     state = {
-        data :null,
-        modalFilterOpen : false
+        data :null, // gaboleh diubah ubah
+        filteredData : null,
+        modalFilterOpen : false,
+        allBrands : null,
+        allCategories : null
     }
 
     componentDidMount(){
         this.getAllProducts()
     }
 
+
     getAllProducts = () => {
         Axios.get(apiUrl + "products")
         .then((res) => {
-            this.setState({data : res.data})
+            console.log(res.data)
+            var allBrand = []
+            var allCategories = []
+            res.data.forEach((val) => {
+                if(!allBrand.includes(val.brand)){
+                    allBrand.push(val.brand)
+                }
+                if(!allCategories.includes(val.category)){
+                    allCategories.push(val.category)
+                }
+            })
+
+         
+            this.setState({data : res.data,filteredData : res.data,allBrands : allBrand, allCategories:allCategories})
+            
         })
         .catch((err) => {
             console.log(err)
@@ -56,11 +74,11 @@ export class ListProducts extends Component {
             })
             // ubah ke default
         }
-        this.setState({data : data})
+        this.setState({filteredData : data})
     }
 
     renderDataToJsx = () => {
-        return this.state.data.map((val) => {
+        return this.state.filteredData.map((val) => {
             return(
                 <div className="col-6 mt-3 col-md-3 ">
                     <div className='border bg-white p-3 h-100'>
@@ -91,6 +109,26 @@ export class ListProducts extends Component {
         this.setState({modalFilterOpen : !this.state.modalFilterOpen})
     }
 
+    onApplyFilterClick = () => {
+        var category = this.refs.category.value // all
+        var brand = this.refs.brand.value
+
+        if(!(category === 'all') || !(brand === 'all')){
+            var filteredData = this.state.data.filter((val) => {
+                if(category === 'all'){
+                    return val.brand === brand
+                }
+                if(brand === 'all'){
+                    return val.category === category
+                }
+                return val.category === category && val.brand ===  brand
+            })
+            console.log(filteredData)
+        }
+
+        this.setState({filteredData : filteredData,modalFilterOpen : false})
+    }
+
     render() {
         return (
             <div>
@@ -101,17 +139,35 @@ export class ListProducts extends Component {
                     </ModalHeader>
                     <ModalBody>
                         <p className='p-0 m-0 sporteens-font-14 font-weight-bold'>Category</p>
-                        <select className='form-control mt-2'>
-                            <option value="Gloves">Gloves</option>
+                        <select ref='category' className='form-control mt-2'>
+                            <option value='all'>All Category</option>
+                            {
+                                this.state.allCategories ?
+                                this.state.allCategories.map((val) => {
+                                    return(
+                                        <option value={val}>{val}</option>
+                                    )
+                                })
+                                :null
+                            }
                         </select>
 
                         <p className='p-0 m-0 mt-4 sporteens-font-14 font-weight-bold'>Brand</p>
-                        <select className='form-control mt-2'>
-                            <option value="Gloves">Adidas</option>
+                        <select ref='brand' className='form-control mt-2'>
+                            <option value='all'>All Brands</option>
+                                {
+                                    this.state.allBrands ?
+                                    this.state.allBrands.map((val) => {
+                                        return(
+                                            <option value={val}>{val}</option>
+                                        )
+                                    })
+                                    :null
+                                }
                         </select>
                     </ModalBody>
                     <ModalFooter>
-                        <input type="button" value="Apply" className='btn btn-info'/>
+                        <input type="button" value="Apply" onClick={this.onApplyFilterClick} className='btn btn-info'/>
                     </ModalFooter>
                 </Modal>
 
