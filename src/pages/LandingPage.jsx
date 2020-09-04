@@ -162,13 +162,13 @@ export class LandingPage extends Component {
                                 <img className='mx-2 ' alt='brand-logo' src={Logo2} width='100%'/>
                             </div>
                             <div className="col-4 col-md-2   h-100">
-                                <img className='mx-2' alt='brand-logo' src={Logo1} width='100%'/>
+                                <img className='mx-2' alt='brand-logo' src={'https://www.freepngimg.com/thumb/puma_logo/6-2-puma-logo-png-clipart-thumb.png'} width='100%'/>
                             </div>
                             <div className="col-4 col-md-2  h-100">
-                                <img className='mx-2 ' alt='brand-logo' src={Logo2} width='100%'/>
+                                <img className='mx-2 ' alt='brand-logo' src={'https://www.freepnglogos.com/uploads/new-balance-png-logo/womens-stylish-shoes-new-balance-png-logo-1.png'} width='100%'/>
                             </div>
                             <div className="col-4 col-md-2   h-100">
-                                <img className='mx-2' alt='brand-logo' src={Logo1} width='100%'/>
+                                <img className='mx-2' alt='brand-logo' src={'https://cdn.freebiesupply.com/logos/large/2x/uhlsport-2-logo-svg-vector.svg'} width='100%'/>
                             </div>
                             <div className="col-4 col-md-2  h-100">
                                 <img className='mx-2 ' alt='brand-logo' src={Logo2} width='100%'/>

@@ -25,7 +25,7 @@ export class App extends Component {
           <Route exact path='/' component={LandingPage} />
           <Route path='/products' component={ListProducts} />
           <Route path='/brands' component={Brands} />
-          <Route path='/carts' component={Cart} />
+          <Route path='/cart' component={Cart} />
           <Route path='/register' component={Register} />
           <Route path='/detail-product/:bebas' component={DetailProduct} />
           <Route path='/create-password' component={CreatePassword} />

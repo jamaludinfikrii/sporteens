@@ -106,3 +106,33 @@
     text-decoration: none;
     color: inherit;
 }
+
+.product-list-title-font {
+    font-family: Helvetica Neue;
+    font-size: 20px;
+    color: #707070
+}
+
+.product-list-price-font {
+    font-family: Helvetica Neue;
+    font-size: 18px;
+    color: #A0A0A0
+}
+
+
+@media screen and (min-width:576px) {
+    .product-list-height {
+        height: 300px;
+        width: auto;
+    }
+    .product-list-title-font {
+        font-family: Helvetica Neue;
+        font-size: 20px;
+        color: #707070
+    }
+    .product-list-price-font {
+        font-family: Helvetica Neue;
+        font-size: 18px;
+        color: #A0A0A0
+    }
+}

@@ -112,9 +112,9 @@ export class ListProducts extends Component {
     onApplyFilterClick = () => {
         var category = this.refs.category.value // all
         var brand = this.refs.brand.value
-
+        var filteredData = this.state.data
         if(!(category === 'all') || !(brand === 'all')){
-            var filteredData = this.state.data.filter((val) => {
+            filteredData = this.state.data.filter((val) => {
                 if(category === 'all'){
                     return val.brand === brand
                 }
