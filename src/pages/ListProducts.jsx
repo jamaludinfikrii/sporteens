@@ -4,14 +4,16 @@ import Axios from 'axios'
 import apiUrl from '../supports/constants/apiUrl'
 import Loader from 'react-loader-spinner'
 import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 
 
 export class ListProducts extends Component {
     state = {
-        data :null
+        data :null,
+        modalFilterOpen : false
     }
 
     componentDidMount(){
@@ -85,9 +87,35 @@ export class ListProducts extends Component {
         })
     }
 
+    modalFilterSwitch = () => {
+        this.setState({modalFilterOpen : !this.state.modalFilterOpen})
+    }
+
     render() {
         return (
             <div>
+                {/* Modal Filter */}
+                <Modal centered={true} toggle={this.modalFilterSwitch} isOpen={this.state.modalFilterOpen}>
+                    <ModalHeader toggle={this.modalFilterSwitch}>
+                        Filter By
+                    </ModalHeader>
+                    <ModalBody>
+                        <p className='p-0 m-0 sporteens-font-14 font-weight-bold'>Category</p>
+                        <select className='form-control mt-2'>
+                            <option value="Gloves">Gloves</option>
+                        </select>
+
+                        <p className='p-0 m-0 mt-4 sporteens-font-14 font-weight-bold'>Brand</p>
+                        <select className='form-control mt-2'>
+                            <option value="Gloves">Adidas</option>
+                        </select>
+                    </ModalBody>
+                    <ModalFooter>
+                        <input type="button" value="Apply" className='btn btn-info'/>
+                    </ModalFooter>
+                </Modal>
+
+
                 {/* Jumbotron Section */}
                 <div>
                     <div className="sporteens-jumbotron-list-products">
@@ -106,8 +134,7 @@ export class ListProducts extends Component {
 
                 <div className="container mt-4">
                     <div className='text-right'>
-                       
-                        <span className='sporteens-font-14 text-secondary sporteens-clickable-el'>Filter <FontAwesomeIcon icon={faChevronDown} /></span>
+                        <span onClick={this.modalFilterSwitch} className='sporteens-font-14 text-secondary sporteens-clickable-el mr-2'>Filter <FontAwesomeIcon icon={faChevronDown} /></span>
                         <select ref='sort' onChange={this.onChangeSort}  className='sporteens-font-14 text-secondary sporteens-clickable-el sporteens-dropdown ml-3'>
                             <option value="sort">Sort By</option>
                             <option value="higherPrice">Higher Price</option>

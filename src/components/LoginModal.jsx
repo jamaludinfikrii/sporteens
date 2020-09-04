@@ -3,22 +3,59 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { Link} from 'react-router-dom'
 import phoneValidator from './../supports/functions/phoneNumberValidator'
 import emailValidator from './../supports/functions/emailValidator'
+import Axios from 'axios'
+import apiUrl from '../supports/constants/apiUrl'
 
 export class LoginModal extends Component {
     state = {
-        modalOpen : false
+        modalOpen : false,
+        errorState : null
     }
 
     onSubmitBtn = () => {
         var data = this.refs.data.value
         var pass = this.refs.password.value
-        if(Number(data[0]) === 0){
-            phoneValidator(data)
-            // phone
+        if(data && pass){
+            if(Number(data[0]) >= 0){
+                if(phoneValidator(data) === true){
+                    var phoneQuery = 'phone=' + data + '&password=' + pass
+                    this.userLogin(phoneQuery)
+                    // login
+                }else{
+                    this.setState({errorState : phoneValidator(data)})
+                }
+            }else{
+                if(emailValidator(data)){
+                    var emailQuery = 'email=' + data + '&password=' + pass
+                    this.userLogin(emailQuery)
+    
+                    // login
+                }else{
+                    this.setState({errorState : 'Email Format Not Correct'})
+                }
+                // email
+            }
         }else{
-            emailValidator(data)
-            // email
+            this.setState({errorState : 'form must be filled'})
         }
+    }
+
+    userLogin = (data) => {
+        Axios.get(apiUrl + 'users?' + data)
+        .then((res) => {    
+            if(res.data.length > 0){
+                alert("Login Success")
+                localStorage.setItem('id',res.data[0].id)
+                window.location = '/'
+                // data ada
+            }else{
+                this.setState({errorState : "Email or password incorrect"})
+                // error
+            }
+        })
+        .catch((err) => {
+            this.setState({errorState : err.message})
+        })
     }
     
     render() {
@@ -32,6 +69,12 @@ export class LoginModal extends Component {
                     <ModalBody>
                         <input type='text' ref='data' placeholder='enter your phone / email' className='form-control' />
                         <input type='password' ref='password' placeholder='enter your password' className='form-control mt-3' />
+                        {
+                            this.state.errorState ? 
+                            <div className="alert alert-danger mt-3">{this.state.errorState}</div>
+                            :
+                            null
+                        }
                         <input type="button" onClick={this.onSubmitBtn} className='btn btn-info mt-4' value='submit'/>
 
                     </ModalBody>

@@ -66,7 +66,9 @@ export class LandingPage extends Component {
                             <div className="col-md-6 text-center text-md-left">
                                 <h1 className='sporteens-light'>Quality never goes out of style.</h1>
                                 <p className='sporteens-light'>Explore your true style with Sporteeens</p>
+                                <Link className='sporteens-link' to='/products'>
                                 <button className='btn btn-white mt-4'>Shop Now</button>
+                                </Link>
                             </div>
                         </div>
                     </div>
