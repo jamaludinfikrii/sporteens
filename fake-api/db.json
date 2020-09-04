@@ -314,5 +314,28 @@
       "image2": "https://www.prodirectsoccer.com/ProductImages/Gallery_1/226904_Gallery_1_0746065.jpg?impolicy=thumb&imwidth=512",
       "image3": "https://www.prodirectsoccer.com/ProductImages/Gallery_3/226904_Gallery_3_0746067.jpg?impolicy=thumb&imwidth=512"
     }
+  ],
+
+  "carts" : [
+    {
+      "id_user" : 5,
+      "id_product" : 3,
+      "qty" : 5
+    },
+    {
+      "id_user" : 5,
+      "id_product" : 2,
+      "qty" : 3
+    },
+    {
+      "id_user" : 5,
+      "id_product" : 10,
+      "qty" : 3
+    },
+    {
+      "id_user" : 4,
+      "id_product" : 3,
+      "qty" : 5
+    }
   ]
 }
