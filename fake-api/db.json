@@ -321,36 +321,56 @@
       "id_user": 4,
       "id_product": 3,
       "qty": 5
+    }
+  ],
+  "transactions": [
+    {
+      "id": 1,
+      "createdAt": "09-07-2020",
+      "totalPrice": 5000000,
+      "status": "unpaid",
+      "id_user": 5,
+      "details": [
+        {
+          "product_name": "Sepatu",
+          "product_price": 2000000,
+          "product_image": "url",
+          "qty": 3
+        },
+        {
+          "product_name": "Jersey Bola",
+          "product_price": 1000000,
+          "product_image": "url",
+          "qty": 1
+        }
+      ]
     },
     {
+      "createdAt": "2020-09-07T05:03:51.903Z",
+      "totalPrice": 7500000,
+      "status": "unpaid",
       "id_user": 5,
-      "id_product": 1,
-      "qty": 3,
-      "id": 8
-    },
-    {
-      "id_user": 5,
-      "id_product": 2,
-      "qty": 1,
-      "id": 9
-    },
-    {
-      "id_user": 5,
-      "id_product": 7,
-      "qty": 1,
-      "id": 10
-    },
-    {
-      "id_user": 5,
-      "id_product": 12,
-      "qty": 1,
-      "id": 11
-    },
-    {
-      "id_user": 5,
-      "id_product": 3,
-      "qty": 2,
-      "id": 12
+      "detail": [
+        {
+          "product_name": "Nike Superfly VII Elite FG x Sancho-Racher Blue/White/Arora",
+          "product_price": 4350000,
+          "product_image": "https://www.prodirectsoccer.com/ProductImages/Main/223585_Main_Thumb_0762387.jpg",
+          "qty": 1
+        },
+        {
+          "product_name": "Nike Mercurial VII Academy IC-Black/Black/Dark Smoke",
+          "product_price": 1600000,
+          "product_image": "https://www.futbolemotion.com/imagesarticulos/145816/grandes/zapatilla-nike-mercurial-superfly-vii7-academy-ic-black-black-dark-smoke-grey-chile-red-0.jpg",
+          "qty": 1
+        },
+        {
+          "product_name": "Adidas Manchester United 20/21 Home Shirt-Real Red",
+          "product_price": 1550000,
+          "product_image": "https://www.prodirectsoccer.com/ProductImages/Main/224395_Main_0747961.jpg?impolicy=thumb&imwidth=512",
+          "qty": 1
+        }
+      ],
+      "id": 2
     }
   ]
 }

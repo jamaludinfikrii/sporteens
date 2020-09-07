@@ -80,7 +80,7 @@ import apiUrl from "../supports/constants/apiUrl";
                     <div className="col-7  cart-bg-color pb-4 pt-2 ">
                       <div className=" cart-title-font font-weight-bold">
                         {this.state.dataProduct[index].name}
-                        <div className="cart-price-font">Rp.{this.state.dataProduct[index].price.toLocaleString('id-ID')}</div>
+                        <div className="text-danger">Rp.{this.state.dataProduct[index].price.toLocaleString('id-ID')}</div>
                       </div>
                       <div className="d-flex flex-column h-75  justify-content-end ">
                         <div className=" d-flex justify-content-between">
@@ -129,17 +129,21 @@ import apiUrl from "../supports/constants/apiUrl";
       var id = this.state.dataCart[index].id
       qty = op === '+' ? qty + 1 : qty -1
 
-      Axios.patch(apiUrl + 'carts/' + id, {qty : qty})
-      .then((res) =>{ 
-        if(res.status === 200){
-          var data = this.state.dataCart
-          data[index].qty = qty
-          this.setState({dataCart : data})
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      if(qty === 0){
+        this.onDeleteCart(id,index)
+      }else{
+        Axios.patch(apiUrl + 'carts/' + id, {qty : qty})
+        .then((res) =>{ 
+          if(res.status === 200){
+            var data = this.state.dataCart
+            data[index].qty = qty
+            this.setState({dataCart : data})
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      }
     }
 
     onDeleteCart = (id,index) => {
@@ -164,6 +168,82 @@ import apiUrl from "../supports/constants/apiUrl";
     }
 
 
+    onCheckoutClick = () => {
+      // {
+      //   "id" : 1,
+      //   "createdAt" : "09-07-2020",
+      //   "totalPrice" : 5000000,
+      //   "status" : "unpaid",
+      //   "id_user" : 5,
+      //   "details" : [
+      //     {
+      //       "product_name" : "Sepatu",
+      //       "product_price" : 2000000,
+      //       "product_image" : "url",
+      //       "qty" : 3
+      //     },
+      //     {
+      //       "product_name" : "Jersey Bola",
+      //       "product_price" : 1000000,
+      //       "product_image" : "url",
+      //       "qty" : 1
+      //     }
+      //   ]
+      // }
+
+
+
+      const detail = this.state.dataCart.map((val,index) => {
+        return {
+          product_name : this.state.dataProduct[index].name,
+          product_price : this.state.dataProduct[index].price,
+          product_image : this.state.dataProduct[index].image1,
+          qty : val.qty
+        }
+      })
+
+
+      const data = {
+        createdAt : new Date(),
+        totalPrice : Number(this.refs.total.innerHTML.split('Rp')[1].split('.').join('')),
+        status : 'unpaid',
+        id_user : Number(localStorage.getItem('id')),
+        detail : detail
+      }
+
+
+      Axios.post(apiUrl + 'transactions',data)
+      .then((res) =>{ 
+        if(res.status === 201){
+
+          var idTransaction = res.data.id
+
+          this.state.dataCart.forEach((val,index) => {
+            Axios.delete(apiUrl + 'carts/' + val.id)
+            .then((res) => {
+              if(index === this.state.dataCart.length -1){
+                console.log(res)
+                alert('Add to cart success')
+                window.location = '/checkout/' + idTransaction
+              }
+              console.log(res)
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+          })
+
+         
+
+
+          
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
+
     getSummaryData = () => {
       var totalItem = 0
       var totalPrice = 0
@@ -182,14 +262,14 @@ import apiUrl from "../supports/constants/apiUrl";
           (
             {totalItem}
           )
-          <p className="product-list-title-font font-weight-bold text-secondary mt-4">
+          <p ref='total' className="product-list-title-font font-weight-bold text-secondary mt-4">
             Total: Rp.
           {totalPrice.toLocaleString('id-ID')}
           </p>
         </h4>
 
         <div>
-          <button className="btn btn-info w-100 font-weight-bold rounded-pill">
+          <button onClick={this.onCheckoutClick} className="btn btn-info w-100 font-weight-bold rounded-pill">
             Checkout
           </button>
         </div>
@@ -219,3 +299,5 @@ import apiUrl from "../supports/constants/apiUrl";
   }
   
   export default Cart;
+
+

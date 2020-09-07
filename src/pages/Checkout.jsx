@@ -17,11 +17,11 @@ export class Checkout extends React.Component{
                     <div className="row justify-content-center">
                         {/* Page Title */}
                         <div className="col-12">
-                            <h2 className="mx-3 text-center text-md-left font-weight-bold">Checkout Page</h2>
+                            <h2 className="mx-3 text-center font-weight-bold">Checkout Page</h2>
                         </div>
 
                         {/* Shipping dress */}
-                        <div className="col-12 col-md-6 py-3">
+                        {/* <div className="col-12 col-md-6 py-3">
                             <div className="px-3 pt-3 pb-1">
                                 <h4>Shipping Address</h4>
                             </div>
@@ -42,9 +42,9 @@ export class Checkout extends React.Component{
                             </div>
                             
                             <div className="pt-3 pb-3">
-                                <input type="button" value="Change Shipping Address" className="btn btn-info rounded-0 w-100 py-2 text-white"/>
+                                <input type="button" value="Change Shipping Address" className="btn sporteens-bg-main-dark rounded-0 w-100 py-2 text-white"/>
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* My Orders & Payment Methods */}
                         <div className="col-12 col-md-6 py-3">
@@ -90,9 +90,9 @@ export class Checkout extends React.Component{
                                 </div>
                             </div>
                             <div className="px-3 pt-5 pb-1">
-                                <h4>Payment Methods</h4>
+                                {/* <h4>Payment Methods</h4> */}
                                 <div className="row pt-1">
-                                    <div className="col-2 py-2 border border-right-0 text-center font-weight-bold">
+                                    {/* <div className="col-2 py-2 border border-right-0 text-center font-weight-bold">
                                         <img src="https://3.bp.blogspot.com/-e1fOq9uUk8M/V15O0WHiIMI/AAAAAAAAAJA/IpxPlLevxLsjisy2I625Yvz-eNzgc6xfgCKgB/s640/Logo%2BBank%2BBNI%2BPNG.png" alt="Bank BNI" width="100%" />
                                     </div>
                                     <div className="col-8 py-2 border border-left-0 border-right-0 font-weight-bold">
@@ -105,16 +105,16 @@ export class Checkout extends React.Component{
                                             :
                                                 <FontAwesomeIcon icon={faChevronRight} className="fa-xs" />
                                         }
-                                    </div>
-                                    {
+                                    </div> */}
+                                    {/* {
                                         this.state.paymentMethods1Toggle?
                                             <div className="col-12 py-2 border border-top-0">
                                                 2468 - 10121418 - 3000 ( A/N PT. Football Store Indonesia )
                                             </div>
                                         :
                                             null
-                                    }
-                                    <div className="col-2 py-2 border border-top-0 border-right-0 text-center font-weight-bold ">
+                                    } */}
+                                    {/* <div className="col-2 py-2 border border-top-0 border-right-0 text-center font-weight-bold ">
                                         <img src="https://1.bp.blogspot.com/-ftTB8bnkTPA/XUJbw4V3afI/AAAAAAAABto/F_-6eIBe7iMuS_5AJodNooYTtBuCaMZ6gCEwYBhgL/s1600/Logo%2BGopay%2BBaru.png" alt="Gopay" width="100%" />
                                     </div>
                                     <div className="col-8 py-2 border border-top-0 border-left-0 border-right-0 font-weight-bold ">
@@ -157,9 +157,9 @@ export class Checkout extends React.Component{
                                             </div>
                                         :
                                             null
-                                    }
+                                    } */}
                                     <div className="col-12 px-0 py-0 mx-0 my-3">
-                                        <input type="button" value="Pay My Orders" className="btn rounded-0 w-100 py-2 btn-info text-white"/>
+                                        <input type="button" value="Pay My Orders" className="btn rounded-0 w-100 py-2 sporteens-bg-main-dark text-white"/>
                                     </div>
                                 </div>
                             </div>
