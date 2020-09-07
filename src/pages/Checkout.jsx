@@ -1,14 +1,32 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Axios from 'axios'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import apiUrl from '../supports/constants/apiUrl';
+import moment from 'moment'
 
 export class Checkout extends React.Component{
     state = {
         paymentMethods1Toggle : false,
         paymentMethods2Toggle : false,
-        paymentMethods3Toggle : false
+        paymentMethods3Toggle : false,
+        data : null
     }
+
+    componentDidMount(){
+        this.getDataTransactionUnpaid()
+    }
+    getDataTransactionUnpaid = () => {
+        var id = this.props.match.params.idTrans
+        Axios.get(apiUrl + 'transactions/' + id)
+        .then((res) => {
+            console.log(res)
+            this.setState({data : res.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
+
     render(){
         return(
             <div>
@@ -50,6 +68,7 @@ export class Checkout extends React.Component{
                         <div className="col-12 col-md-6 py-3">
                             <div className="px-3 pt-3 pb-1">
                                 <h4>My Orders</h4>
+                                <p>Date : {this.state.data ? moment(this.state.data.createdAt).format('MMMM Do YYYY, h:mm:ss a') : 'loading ..'}</p>
                                 <div className="row pt-1">
                                     <div className="col-8 py-2 border border-right-0 font-weight-bold">
                                         Items
@@ -57,17 +76,12 @@ export class Checkout extends React.Component{
                                     <div className="col-4 py-2 border font-weight-bold ">
                                         Sub-Total
                                     </div>
-                                    <div className="col-8 py-2 border border-top-0 border-right-0">
-                                        <span>Nike Superfly VII Elite FG x Sancho-Racher Blue/White/Arora<span className="font-weight-bold"> ( x2 )</span></span>
-                                    </div>
-                                    <div className="col-4 py-2 border border-top-0">
-                                        Rp. 4.350.000
-                                    </div>
+                                    
                                     <div className="col-8 py-2 border border-top-0 border-right-0">
                                         <span className="font-weight-bold">Sub-Total</span>
                                     </div>
                                     <div className="col-4 py-2 border border-top-0">
-                                        Rp. 4.350.000
+                                        Rp. {this.state.data ? this.state.data.totalPrice.toLocaleString('id-ID') : 'loading ..'}
                                     </div>
                                     <div className="col-8 py-2 border border-top-0 border-right-0">
                                         <span className="font-weight-bold">Shipping Rates</span>
@@ -85,7 +99,7 @@ export class Checkout extends React.Component{
                                         <span className="text-danger font-weight-bold">Total</span>
                                     </div>
                                     <div className="col-4 py-2 border border-top-0">
-                                        Rp. 4.370.495
+                                        Rp. {this.state.data ? (this.state.data.totalPrice + 20000 + 495).toLocaleString('id-ID') : 'loading ..'}
                                     </div>
                                 </div>
                             </div>

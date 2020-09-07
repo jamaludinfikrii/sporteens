@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import CreatePassword from './pages/CreatePassword'
 import DetailProduct from './pages/DetailProduct'
 import Checkout from './pages/Checkout'
+import TransactionHistory from './pages/TransactionHistory'
 // 
 
 export class App extends Component {
@@ -28,7 +29,8 @@ export class App extends Component {
           <Route path='/brands' component={Brands} />
           <Route path='/cart' component={Cart} />
           <Route path='/register' component={Register} />
-          <Route path='/checkout' component={Checkout} />
+          <Route path='/checkout/:idTrans' component={Checkout} />
+          <Route path='/transaction-history' component={TransactionHistory} />
           <Route path='/detail-product/:bebas' component={DetailProduct} />
           <Route path='/create-password' component={CreatePassword} />
         </Switch>

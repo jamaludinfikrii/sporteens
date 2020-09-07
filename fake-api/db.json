@@ -325,27 +325,6 @@
   ],
   "transactions": [
     {
-      "id": 1,
-      "createdAt": "09-07-2020",
-      "totalPrice": 5000000,
-      "status": "unpaid",
-      "id_user": 5,
-      "details": [
-        {
-          "product_name": "Sepatu",
-          "product_price": 2000000,
-          "product_image": "url",
-          "qty": 3
-        },
-        {
-          "product_name": "Jersey Bola",
-          "product_price": 1000000,
-          "product_image": "url",
-          "qty": 1
-        }
-      ]
-    },
-    {
       "createdAt": "2020-09-07T05:03:51.903Z",
       "totalPrice": 7500000,
       "status": "unpaid",
@@ -371,6 +350,42 @@
         }
       ],
       "id": 2
+    },
+    {
+      "createdAt": "2020-09-07T07:13:04.029Z",
+      "totalPrice": 5525000,
+      "status": "unpaid",
+      "id_user": 5,
+      "detail": [
+        {
+          "product_name": "Adidas Nemeziz Messi .3 IN-Team Royal Blue/Silver",
+          "product_price": 1475000,
+          "product_image": "https://www.prodirectsoccer.com/ProductImages/Gallery_5/226400_Gallery_5_0736006.jpg?impolicy=thumb&imwidth=512",
+          "qty": 3
+        },
+        {
+          "product_name": "Sells Pro Wap-Black Aqua Blue",
+          "product_price": 1100000,
+          "product_image": "https://www.prodirectsoccer.com/ProductImages/Main/216104_Main_Thumb_0639260.jpg?impolicy=thumb&imwidth=512",
+          "qty": 1
+        }
+      ],
+      "id": 3
+    },
+    {
+      "createdAt": "2020-09-07T07:14:07.437Z",
+      "totalPrice": 1600000,
+      "status": "unpaid",
+      "id_user": 1,
+      "detail": [
+        {
+          "product_name": "Nike Mercurial VII Academy IC-Black/Black/Dark Smoke",
+          "product_price": 1600000,
+          "product_image": "https://www.futbolemotion.com/imagesarticulos/145816/grandes/zapatilla-nike-mercurial-superfly-vii7-academy-ic-black-black-dark-smoke-grey-chile-red-0.jpg",
+          "qty": 1
+        }
+      ],
+      "id": 4
     }
   ]
 }

@@ -105,6 +105,12 @@ export class Navbar extends Component {
 
                             {this.state.isLogin ? 
                                 <span>
+                                     <span className='mr-md-3 sporteens-clickable-el' >
+                                        <Link to='/transaction-history' className='sporteens-link'>
+
+                                        History
+                                        </Link>
+                                    </span>   
                                     <span className='mr-md-3 sporteens-clickable-el' >
                                         <Link to='/cart' className='sporteens-link'>
 
