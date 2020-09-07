@@ -16,6 +16,16 @@ class ViewProduct extends Component{
     componentDidMount(){
         window.scrollTo(0,0)
         this.getDataProductsById()
+        this.getLoginStatus()
+    }
+
+    getLoginStatus = () => {
+        const id = localStorage.getItem('id')
+        if(id){
+            this.setState({isLogin : true})
+        }else{
+            this.setState({isLogin:  false})
+        }
     }
 
     getDataProductsById = () => {
@@ -31,6 +41,44 @@ class ViewProduct extends Component{
         })
     }
 
+    onAddToCartClick = () => {
+        const data = {
+            id_user : Number(localStorage.getItem('id')),
+            id_product : Number(this.props.match.params.bebas),
+            qty : 1
+        }
+
+        if(data.id_user && data.id_product && data.qty){
+            Axios.get(apiUrl + 'carts?id_user=' + data.id_user + '&id_product=' + data.id_product)
+            .then((res) => {
+                if(res.data.length === 0){
+                    Axios.post(apiUrl + 'carts' , data)
+                    .then((res) => {
+                        if(res.status === 201){
+                            alert("Add to cart success");
+                            window.location = '/cart'
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+                }else{
+                    var qty = res.data[0].qty + 1
+                    Axios.patch(apiUrl + 'carts/' + res.data[0].id , {qty : qty})
+                    .then((res) => {
+                        if(res.status === 200){
+                            alert("qty updated");
+                            window.location = '/cart'
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+                }
+            })
+        }
+    }
+
     render(){
         if(this.state.data === null) {
             return (
@@ -40,7 +88,7 @@ class ViewProduct extends Component{
         return(
             <div>
                 <div className="container mt-5">
-                   
+                    
                     <div className="row justify-content-center">
                         <div className="col-md-6">
                             <div className="row justify-content-center px-3 py-3">
@@ -83,7 +131,7 @@ class ViewProduct extends Component{
                                 <div className="col-5 col-md-6">
                                     {
                                         this.state.isLogin ? 
-                                        <input type="button" value="Add To Cart" className="btn rounded-0 w-100 sporteens-bg-main text-white"/>
+                                        <input type="button" onClick={this.onAddToCartClick} value="Add To Cart" className="btn rounded-0 w-100 sporteens-bg-main text-white"/>
                                         :
                                         <LoginModal isi='Add to cart' className='btn rounded-0 w-100 sporteens-bg-main text-white' />
                                     }

@@ -13,7 +13,7 @@ import apiUrl from "../supports/constants/apiUrl";
   class Cart extends Component {
     state = {
         dataCart : null,
-        dataProduct : null
+        dataProduct : null,
     }
     componentDidMount(){
         this.getDataCart()
@@ -80,25 +80,26 @@ import apiUrl from "../supports/constants/apiUrl";
                     <div className="col-7  cart-bg-color pb-4 pt-2 ">
                       <div className=" cart-title-font font-weight-bold">
                         {this.state.dataProduct[index].name}
-                        <div className="cart-price-font">Rp.{this.state.dataProduct[index].price}</div>
+                        <div className="cart-price-font">Rp.{this.state.dataProduct[index].price.toLocaleString('id-ID')}</div>
                       </div>
                       <div className="d-flex flex-column h-75  justify-content-end ">
                         <div className=" d-flex justify-content-between">
                           <span>
-                            <button className="btn btn-secondary rounded-circle">
-                              <FontAwesomeIcon icon={faPlus} />
+                            <button onClick={() => this.editQty('-',index)} className="btn btn-secondary rounded-circle">
+                              <FontAwesomeIcon icon={faMinus}  />
                             </button>
   
                             <span className=" mx-2 product-list-title-font font-weight-bold text-success ">
                               {val.qty}
                             </span>
   
-                            <button className="btn btn-info rounded-circle">
-                              <FontAwesomeIcon icon={faMinus} size="1" />
+                            <button onClick={() => this.editQty('+',index)} className="btn btn-info rounded-circle">
+                              <FontAwesomeIcon icon={faPlus}  size="1" />
                             </button>
                           </span>
                           <div>
                             <button
+                              onClick = {() => this.onDeleteCart(val.id,index)}
                               className="btn btn-danger rounded-pill"
                               id="RemoveCart"
                             >
@@ -123,6 +124,80 @@ import apiUrl from "../supports/constants/apiUrl";
     }
 
 
+    editQty = (op,index) => {
+      var qty = this.state.dataCart[index].qty
+      var id = this.state.dataCart[index].id
+      qty = op === '+' ? qty + 1 : qty -1
+
+      Axios.patch(apiUrl + 'carts/' + id, {qty : qty})
+      .then((res) =>{ 
+        if(res.status === 200){
+          var data = this.state.dataCart
+          data[index].qty = qty
+          this.setState({dataCart : data})
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
+
+    onDeleteCart = (id,index) => {
+      if(window.confirm('Are You Sure Want to delete this item ?')){
+        Axios.delete(apiUrl + 'carts/' + id)
+        .then((res) => {
+          if(res.status === 200){
+            var data = this.state.dataCart
+            var dataProduct = this.state.dataProduct
+
+            data.splice(index,1)
+            dataProduct.splice(index,1)
+
+            this.setState({dataCart : data,dataProduct : dataProduct})
+
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      }
+    }
+
+
+    getSummaryData = () => {
+      var totalItem = 0
+      var totalPrice = 0
+      this.state.dataCart.forEach((val,index) => {
+        totalPrice += val.qty * this.state.dataProduct[index].price
+        totalItem += val.qty
+      })
+
+      return(
+        <div
+        className="col-md-5 d-flex border rounded flex-column justify-content-between pb-2 h-25 p-3  "
+        
+      >
+        <h4 className="product-details-font-title font-weight-light sporteens-main-dark pt-2">
+          Cart Summary{" "}
+          (
+            {totalItem}
+          )
+          <p className="product-list-title-font font-weight-bold text-secondary mt-4">
+            Total: Rp.
+          {totalPrice.toLocaleString('id-ID')}
+          </p>
+        </h4>
+
+        <div>
+          <button className="btn btn-info w-100 font-weight-bold rounded-pill">
+            Checkout
+          </button>
+        </div>
+      </div>
+      )
+    }
+
+
     render() {
       return (
         <div className="container pt-5">
@@ -136,27 +211,7 @@ import apiUrl from "../supports/constants/apiUrl";
                 {this.state.dataProduct === null || this.state.dataCart === null ? 'loading...' : this.renderDataToJsx()}
               </div>
             </div>
-            <div
-              className="col-md-5 d-flex border rounded flex-column justify-content-between pb-2 h-25 p-3  "
-              
-            >
-              <h4 className="product-details-font-title font-weight-light sporteens-main-dark pt-2">
-                Cart Summary{" "}
-                (
-                  4
-                )
-                <p className="product-list-title-font font-weight-bold text-secondary mt-4">
-                  Total:
-                10.000.000
-                </p>
-              </h4>
-  
-              <div>
-                <button className="btn btn-info w-100 font-weight-bold rounded-pill">
-                  Checkout
-                </button>
-              </div>
-            </div>
+            {this.state.dataProduct === null || this.state.dataCart === null ? 'loading...' : this.getSummaryData() }
           </div>
         </div>
       );

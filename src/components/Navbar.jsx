@@ -12,11 +12,29 @@ export class Navbar extends Component {
         openToggle : false,
         isLogin : false,
         data : null,
-        modalOpen : false
+        modalOpen : false,
+        cartLength : 0
     }
 
     componentDidMount(){
         this.getIdUser()
+        this.getDataCartLength()
+    }
+
+    getDataCartLength = () => {
+        const idUser = localStorage.getItem('id')
+        if(idUser){
+            Axios.get(apiUrl + 'carts?id_user=' + idUser)
+            .then((res) => {
+                if(res.status === 200){
+                    this.setState({cartLength : res.data.length})
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+      
     }
 
 
@@ -90,7 +108,7 @@ export class Navbar extends Component {
                                     <span className='mr-md-3 sporteens-clickable-el' >
                                         <Link to='/cart' className='sporteens-link'>
 
-                                        Cart
+                                        Cart <span class="badge badge-light">{this.state.cartLength}</span>
                                         </Link>
                                     </span>   
                                     <span className='d-inline-block mr-md-3 sporteens-clickable-el' >
