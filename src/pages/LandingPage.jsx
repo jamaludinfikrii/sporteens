@@ -21,6 +21,7 @@ export class LandingPage extends Component {
 
     componentDidMount(){
         this.getAllProducts()
+        this.getBestSellerProducts()
     }
 
     getAllProducts = () => {
@@ -31,6 +32,51 @@ export class LandingPage extends Component {
         })
         .catch((err) => {
             alert(err.message)
+        })
+    }
+
+
+    getBestSellerProducts = () => {
+        Axios.get(apiUrl + "transactions")
+        .then((res) => {
+            console.log(res.data)
+
+            // count total 
+            var sold = []
+            res.data.forEach((val) => {
+                val.detail.forEach((prod) => {
+                    var isAda = false
+                    var indexAda = null
+                    for(var i =0 ; i < sold.length ; i ++){
+                        if(sold[i].product_name === prod.product_name){
+                            isAda = true
+                            indexAda = i
+                        }
+                    }
+
+                    if(isAda){
+                        sold[indexAda].qty += prod.qty
+                    }else{
+                        sold.push(prod)
+                    }
+                })
+            })
+
+            sold.sort((a,b) => {
+                return b.qty - a.qty
+            })
+
+      
+            
+
+
+
+            console.log(sold)
+            
+            
+        })
+        .catch((err) => {
+            console.log(err)
         })
     }
 
