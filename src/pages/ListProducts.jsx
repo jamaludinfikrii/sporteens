@@ -79,29 +79,33 @@ export class ListProducts extends Component {
 
     renderDataToJsx = () => {
         return this.state.filteredData.map((val) => {
-            return(
-                <div className="col-6 mt-3 col-md-3 ">
-                    <div className='border bg-white p-3 h-100'>
-                        <Link to={'/detail-product/' + val.id} className='sporteens-link'>
-                            <img className='sporteens-clickable-el' src={val.image1} width='100%'  alt="product"/>
-                            <p  className='p-0 m-0 sporteens-main-dark font-weight-bold sporteens-clickable-el'>{val.name.slice(0,20) + '...' }</p>
-                        </Link>
-                        {
-                            val.discount ? 
-                            <span>
-                                <p className='p-0 m-0 text-danger'>{val.discount}% Off</p>
-                                <p className='p-0 m-0 text-secondary sporteens-font-14'> <s>Rp. {val.price.toLocaleString('id-ID')}</s> </p>
-                                <p className='p-0 m-0 sporteens-main-dark '> Rp. {(val.price * (1 - val.discount/100)).toLocaleString('id-ID')} </p>
-                            </span>
-                            :
-                            // <span className='d-flex border'>
-                                <p className='p-0 m-0 sporteens-main-dark '> Rp. {val.price.toLocaleString('id-ID')} </p>
-                            // </span>
-                        }
-                        
+            if(!val.isDraft){
+                return(
+                    <div className="col-6 mt-3 col-md-3 ">
+                        <div className='border bg-white p-3 h-100'>
+                            <Link to={'/detail-product/' + val.id} className='sporteens-link'>
+                                <img className='sporteens-clickable-el' src={val.image1} width='100%'  alt="product"/>
+                                <p  className='p-0 m-0 sporteens-main-dark font-weight-bold sporteens-clickable-el'>{val.name.slice(0,20) + '...' }</p>
+                            </Link>
+                            {
+                                val.discount ? 
+                                <span>
+                                    <p className='p-0 m-0 text-danger'>{val.discount}% Off</p>
+                                    <p className='p-0 m-0 text-secondary sporteens-font-14'> <s>Rp. {val.price.toLocaleString('id-ID')}</s> </p>
+                                    <p className='p-0 m-0 sporteens-main-dark '> Rp. {(val.price * (1 - val.discount/100)).toLocaleString('id-ID')} </p>
+                                </span>
+                                :
+                                // <span className='d-flex border'>
+                                    <p className='p-0 m-0 sporteens-main-dark '> Rp. {val.price.toLocaleString('id-ID')} </p>
+                                // </span>
+                            }
+                            
+                        </div>
                     </div>
-                </div>
-            )
+                )
+            }else{
+                return null
+            }
         })
     }
 
