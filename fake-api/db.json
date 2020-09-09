@@ -2,74 +2,86 @@
   "users": [
     {
       "id": 1,
-      "phone": "0822274821",
-      "email": "",
-      "password": "123123"
+      "phone": "",
+      "email": "admin@admin.com",
+      "role" : "admin",
+      "password": "admin"
     },
     {
       "phone": "0822268479346",
       "email": "",
       "password": "123123",
+      "role" : "user",
       "id": 2
     },
     {
       "phone": "0823817584",
       "email": "",
       "password": "",
+      "role" : "user",
       "id": 3
     },
     {
       "phone": "08287612423",
       "email": "",
       "password": "123123",
+      "role" : "user",
       "id": 4
     },
     {
       "email": "fikri@fikri.com",
       "phone": "",
       "password": "234234",
+      "role" : "user",
       "id": 5
     },
     {
       "phone": "082226847592",
       "email": "",
       "password": "123123",
+      "role" : "user",
       "id": 6
     },
     {
       "email": "joko@joko.com",
       "phone": "",
       "password": "123123",
+      "role" : "user",
       "id": 7
     },
     {
       "email": "joko@fikri.com",
       "phone": "",
       "password": "123123",
+      "role" : "user",
       "id": 8
     },
     {
       "email": "fikri@fikri.id",
       "phone": "",
       "password": "123123",
+      "role" : "user",
       "id": 9
     },
     {
       "phone": "08274538645",
       "email": "",
       "password": "123123",
+      "role" : "user",
       "id": 10
     },
     {
       "phone": "06535669876",
       "email": "",
       "password": "123123",
+      "role" : "user",
       "id": 11
     },
     {
       "phone": "0746852334",
       "email": "",
       "password": "123123",
+      "role" : "user",
       "id": 12
     }
   ],
@@ -386,6 +398,27 @@
         }
       ],
       "id": 4
+    },
+    {
+      "createdAt": "2020-09-07T07:16:04.056Z",
+      "totalPrice": 3075000,
+      "status": "paid",
+      "id_user": 1,
+      "detail": [
+        {
+          "product_name": "Nike Mercurial VII Academy IC-Black/Black/Dark Smoke",
+          "product_price": 1600000,
+          "product_image": "https://www.futbolemotion.com/imagesarticulos/145816/grandes/zapatilla-nike-mercurial-superfly-vii7-academy-ic-black-black-dark-smoke-grey-chile-red-0.jpg",
+          "qty": 1
+        },
+        {
+          "product_name": "Adidas Nemeziz Messi .3 IN-Team Royal Blue/Silver",
+          "product_price": 1475000,
+          "product_image": "https://www.prodirectsoccer.com/ProductImages/Gallery_5/226400_Gallery_5_0736006.jpg?impolicy=thumb&imwidth=512",
+          "qty": 1
+        }
+      ],
+      "id": 5
     }
   ]
 }

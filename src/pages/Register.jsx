@@ -45,6 +45,7 @@ class Register extends Component{
     sendDataToApi = (data) => {
         var dataToSend = data
         dataToSend.password = ''
+        dataToSend.role = 'user';
 
         var datatype = data.phone ? 'phone' : 'email'
         var datavalue = data.phone ? data.phone : data.email
