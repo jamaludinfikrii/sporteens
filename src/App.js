@@ -19,6 +19,7 @@ import apiUrl from './supports/constants/apiUrl'
 import Statistics from './pages/Statistics'
 import PageNotFound from './components/PageNotFound'
 import ProductManagement from './pages/ProductManagement'
+import ProductManagementDetail from './pages/ProductManagementDetail'
 // 
 
 export class App extends Component {
@@ -71,6 +72,7 @@ export class App extends Component {
           <Route path='/checkout/:idTrans' component={Checkout} />
           <Route path='/transaction-history' component={TransactionHistory} />
           <Route path='/detail-product/:bebas' component={DetailProduct} />
+          <Route path='/product-management/detail/:id' component={ProductManagementDetail} />
           <Route path='/product-management' component={ProductManagement} />
           <Route path='/create-password' component={CreatePassword} />
           <Route path='*' component={PageNotFound} />
