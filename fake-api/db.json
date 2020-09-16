@@ -349,9 +349,9 @@
   ],
   "carts": [
     {
-      "id": 4,
-      "id_user": 4,
-      "id_product": 3,
+      "id": 4, 
+      "id_user": 4, 
+      "id_product": 3, 
       "qty": 5
     }
   ],
